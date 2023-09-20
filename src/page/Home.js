@@ -9,7 +9,7 @@ const Home = () => {
 
     const handleLogout = () => {
         signOut(auth).then(() => {
-            navigate("/login");
+            navigate("/");
             console.log("Signed out successfully")
         }).catch((error) => {
             console.log('Error signing out: ', error);
@@ -32,12 +32,32 @@ const Home = () => {
     return (
         <>
             <nav>
-                <p>
-                    Welcome Home
-                </p>
-                <NavLink to="/patient">
-                    Ingresar paciente
-                </NavLink>
+                <h1>
+                    Módulo de Ingreso
+                </h1>
+                <nav>
+                    <NavLink to="/patient">
+                        Ingresar paciente
+                    </NavLink>
+                    <NavLink to="/seguimiento">
+                        | Historia
+                    </NavLink>
+                    <NavLink to="/seguimiento">
+                        | Parto
+                    </NavLink>
+                    <NavLink to="/seguimiento">
+                        | Hemorragia
+                    </NavLink>
+                    <NavLink to="/seguimiento">
+                        | Transfusiones
+                    </NavLink>
+                    <NavLink to="/seguimiento">
+                        | Seguimiento
+                    </NavLink>
+                    <NavLink to="/seguimiento">
+                        | Egreso
+                    </NavLink>
+                </nav>
                 <div>
                     <button onClick={handleLogout}>
                         Logout

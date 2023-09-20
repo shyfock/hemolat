@@ -6,6 +6,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Routes, Route } from 'react-router-dom';
 import Patient from "./page/Patient";
 import Seguimiento from "./page/Seguimiento";
+import Welcome from "./page/Welcome";
 
 function App() {
 
@@ -14,11 +15,19 @@ function App() {
             <div>
                 <section>
                     <Routes>
-                        <Route path="/" element={<Home/>} />
+                        <Route path="/" element={<Welcome />} />
+                        <Route path="/home" element={<Home />} />
                         <Route path="/signup" element={<Signup/>} />
                         <Route path="/login" element={<Login/>} />
                         <Route path="/patient" element={<Patient/>} />
                         <Route path="/seguimiento" element={<Seguimiento />}/>
+                        <Route path="*"
+                            element={
+                                <>
+                                    <h1>Ruta no encontrada - ERROR 404</h1>
+                                </>
+                            }
+                        />
                     </Routes>
                 </section>
             </div>

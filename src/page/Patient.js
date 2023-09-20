@@ -1,27 +1,28 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { getDatabase, ref, set } from "firebase/database";
+import { NavLink, useNavigate } from "react-router-dom";
+import { getDatabase, push, ref, set } from "firebase/database";
 
-async function writePatientData(patientId, name, lastname, email) {
+async function writePatientData(name, lastname, email) {
     const db = getDatabase();
-    set(ref(db, 'users/' + patientId), {
-        patientId: patientId,
+    set(push(ref(db, 'patients/')), {
+        // patientId: patientId,
         name: name,
         lastname : lastname ,
         email:email
     });
 }
 const Patient = () => {
+    const navigate = useNavigate();
     //state variables for the form inputs and button
-    const [patientId, setPatientId] = useState("");
+    // const [patientId, setPatientId] = useState("");
     const [name, setName] = useState("");
-    const [lastname, setLastname ]=useState("") ;
-    const[email,setEmail]=useState("");
+    const [lastname, setLastname] = useState("");
+    const [email,setEmail] = useState("");
 
     //onsubmit function to send data to firebase database
     const onSubmit = async (e) => {
         e.preventDefault();
-        await writePatientData(patientId, name, lastname, email)
+        await writePatientData(name, lastname, email)
             .then(patient => console.log(patient + " CREATED"))
             .catch(error => console.log(error.code))
     }
@@ -31,7 +32,7 @@ const Patient = () => {
             <NavLink to="/home">Atrás</NavLink>
             <h3>Datos de la paciente</h3>
             <form>
-                <div>
+                {/* <div>
                     <label htmlFor="id-patient">ID: </label>
                     <input 
                         type="text"
@@ -41,7 +42,7 @@ const Patient = () => {
                         placeholder="ID de paciente"
                         required
                     />
-                </div>
+                </div> */}
                 <div>
                     <label htmlFor="name">Nombre: </label>
                     <input 
@@ -81,16 +82,14 @@ const Patient = () => {
                 </div>
                 <button type="submit" onClick={onSubmit}>Agregar Paciente</button>
             </form>
-            <select>
+            <select onChange={e => navigate(`/${e.target.value}`)}>
                 <option value="default">Seleccione...</option>
-                <option value={"Historia"}><NavLink to={"/seguimiento"}>Historia</NavLink></option>
-                <option value={"Parto"}><NavLink to={"/seguimiento"}>Parto</NavLink></option>
-                <option value={"Hemorragia"}><NavLink to={"/seguimiento"}>Hemorragia</NavLink></option>
-                <option value={"Transfusiones"}><NavLink to={"/seguimiento"}>Transfusiones</NavLink></option>
-                <option value={"Seguimiento"}><NavLink to={"/seguimiento"}>Seguimiento</NavLink></option>
-                <option value={"Egreso"}><NavLink to={"/seguimiento"}>Egreso</NavLink></option>
-                
-                
+                <option value="historia">Historia</option>
+                <option value="parto">Parto</option>
+                <option value="hemorragia">Hemorragia</option>
+                <option value="transfusiones">Transfusiones</option>
+                <option value="seguimiento">Seguimiento</option>
+                <option value="egreso">Egreso</option>
             </select>
         </>
     )
