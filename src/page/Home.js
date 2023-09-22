@@ -39,7 +39,7 @@ const Home = () => {
                     <NavLink to="/patient">
                         Ingresar paciente
                     </NavLink>
-                    <NavLink to="/seguimiento">
+                    <NavLink to="/historia">
                         | Historia
                     </NavLink>
                     <NavLink to="/seguimiento">

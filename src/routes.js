@@ -7,6 +7,7 @@ import { Routes, Route } from 'react-router-dom';
 import Patient from "./page/Patient";
 import Seguimiento from "./page/Seguimiento";
 import Welcome from "./page/Welcome";
+import Historia from "./page/Historia";
 
 function App() {
 
@@ -20,7 +21,8 @@ function App() {
                         <Route path="/signup" element={<Signup/>} />
                         <Route path="/login" element={<Login/>} />
                         <Route path="/patient" element={<Patient/>} />
-                        <Route path="/seguimiento" element={<Seguimiento />}/>
+                        <Route path="/historia" element={<Historia/>} />
+                        <Route path="/seguimiento" element={<Seguimiento />} />
                         <Route path="*"
                             element={
                                 <>
