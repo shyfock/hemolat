@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+// import React, { useState, useEffect } from "react";
 import Home from './page/Home'
 import Signup from './page/Signup';
 import Login from './page/Login';
@@ -8,30 +8,81 @@ import Patient from "./page/Patient";
 import Seguimiento from "./page/Seguimiento";
 import Welcome from "./page/Welcome";
 import Historia from "./page/Historia";
+import { AuthenticatedRoute, UnauthenticatedRoute } from "./routing";
 
 function App() {
 
     return (
         <Router>
-            <div>
-                <section>
-                    <Routes>
-                        <Route path="/" element={<Welcome />} />
-                        <Route path="/home" element={<Home />} />
-                        <Route path="/signup" element={<Signup/>} />
-                        <Route path="/login" element={<Login/>} />
-                        <Route path="/patient" element={<Patient/>} />
-                        <Route path="/historia" element={<Historia/>} />
-                        <Route path="/seguimiento" element={<Seguimiento />} />
-                        <Route path="*"
-                            element={
-                                <>
-                                    <h1>Ruta no encontrada - ERROR 404</h1>
-                                </>
-                            }
-                        />
-                    </Routes>
-                </section>
+        <Home />
+        <div>
+            <Routes>
+                <Route
+                    path={"/"}
+                    element={
+                        <UnauthenticatedRoute>
+                            <Welcome />
+                        </UnauthenticatedRoute>
+                    }
+                />
+                <Route
+                    path="/home"
+                    element={
+                        <AuthenticatedRoute>
+                            <Home />
+                        </AuthenticatedRoute>
+                    }
+                />
+                <Route 
+                    path="/signup" 
+                    element={
+                        <UnauthenticatedRoute>
+                            <Signup/>
+                        </UnauthenticatedRoute>
+                    } 
+                />
+                <Route 
+                    path="/login" 
+                    element={
+                        <UnauthenticatedRoute>
+                            <Login/>
+                        </UnauthenticatedRoute>
+                    }
+                />
+                <Route 
+                    path="/patient" 
+                    element={
+                        <AuthenticatedRoute>
+                            <Patient/>
+                        </AuthenticatedRoute>
+                    } 
+                />
+                <Route
+                    path="/historia" 
+                    element={
+                        <AuthenticatedRoute>
+                            <Historia/>
+                        </AuthenticatedRoute>
+                    } 
+                />
+                <Route 
+                    path="/seguimiento" 
+                    element={
+                        <AuthenticatedRoute>
+                            <Seguimiento />
+                        </AuthenticatedRoute>
+                    } 
+                />
+                <Route path="*"
+                    element={
+                        <UnauthenticatedRoute>
+                            <>
+                                <h1>Ruta no encontrada - ERROR 404</h1>
+                            </>
+                        </UnauthenticatedRoute>
+                    }
+                />
+            </Routes>
             </div>
         </Router>
     );

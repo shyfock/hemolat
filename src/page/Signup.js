@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+// import { auth } from "../firebase";
 
 const Signup = () => {
+    const auth = getAuth()
     const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
@@ -34,7 +35,7 @@ const Signup = () => {
                         <h1>HemolatApp</h1>
                         <form>
                             <div>
-                                <label htmlFor="email">Email address</label>
+                                <label htmlFor="email">Correo Electrónico</label>
                                 <input 
                                     type='email' 
                                     id="email" 
@@ -42,11 +43,11 @@ const Signup = () => {
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     required
-                                    placeholder="Email address"
+                                    placeholder="Correo Electrónico"
                                 />
                             </div>
                             <div>
-                                <label htmlFor="password">Password</label>
+                                <label htmlFor="password">Contraseña</label>
                                 <input
                                     type='password'
                                     id="password"
@@ -54,15 +55,15 @@ const Signup = () => {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
-                                    placeholder="Password"
+                                    placeholder="Contraseña"
                                     autoComplete="pass"
                                 />
                             </div>
-                            <button type="submit" onClick={onSubmit}>Sign up</button>
+                            <button type="submit" onClick={onSubmit}>Registrarse</button>
                             <p>
-                                Already have an account?{' '}
+                                ¿Ya está registrado?{' '}
                                 <NavLink to="/login">
-                                    Sign in
+                                    Ingresar
                                 </NavLink>
                             </p>
                         </form>

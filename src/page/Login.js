@@ -1,21 +1,30 @@
-import React, { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
+import React, { useContext, useState } from "react";
+import { setPersistence, signInWithEmailAndPassword, browserSessionPersistence, getAuth } from "firebase/auth";
+// import { auth } from "../firebase";
 import { NavLink, useNavigate } from "react-router-dom";
+import { AuthContext, useAuthState } from "../firebase";
 
 const Login = () => {
+    const auth = getAuth()
+    const authed = useAuthState()
+    console.log("Authed:", authed)
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const onLogin = (e) => {
+    const onLogin = async (e) => {
         e.preventDefault();
-        signInWithEmailAndPassword(auth, email, password)
+        await setPersistence(auth, browserSessionPersistence)
+        // await signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                //                console.log("User logged in successfully");
-                const user = userCredential.user;
+                // const user = userCredential.user;
                 navigate("/home");
-                console.log(user);
+                // console.log(user);
+                console.log("User logged in successfully");
+                return signInWithEmailAndPassword(auth, email, password);
+            })
+            .then((userCredential) => {
+                console.log(userCredential.user.uid);
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -25,48 +34,48 @@ const Login = () => {
     }
 
     return (
-        <>
+        <AuthContext.Provider value={authed}>
             <main>
                 <section>
                     <div>
-                        <p> HemolatApp </p>
+                        <h1> HemolatApp </h1>
                         <form>
                             <div>
-                                <label htmlFor="email-address">Email address</label>
+                                <label htmlFor="email-address">Correo Electrónico</label>
                                 <input
                                     id="email-address"
                                     name="email"
                                     type="email"
                                     required
-                                    placeholder="Email address"
+                                    placeholder="Correo Electrónico"
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>
                             <div>
-                                <label htmlFor="password">Password</label>
+                                <label htmlFor="password">Contraseña</label>
                                 <input
                                     id="password"
                                     name="password"
                                     type="password"
                                     required
-                                    placeholder="Password"
+                                    placeholder="Contraseña"
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
                             </div>
                             <div>
-                                <button onClick={onLogin}>Login</button>
+                                <button onClick={onLogin}>Ingresar</button>
                             </div>
                         </form>
                         <p>
-                            No account yet? {' '}
+                            ¿Aún no está registrado? {' '}
                             <NavLink to="/signup">
-                                Sign up
+                                Registrarse
                             </NavLink>
                         </p>
                     </div>
                 </section>
             </main>
-        </>
+        </AuthContext.Provider>
     )
 }
 

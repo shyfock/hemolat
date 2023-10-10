@@ -1,0 +1,34 @@
+{
+    "centros": {
+        "*": {
+            "nombre": "Hospital de Suba",
+            "pais": "Colombia",
+            "responsable": "Liliana Correa"
+        },
+        "centro2": {
+            "nombre": "Hospital de Kennedy",
+            "pais": "Colombia",
+            "responsable": "Héctor González"
+        },
+        "centro3": {
+            "nombre": "Subred Norte",
+            "pais": "Colombia",
+            "responsable": "Ayesa Ortegón"
+        },
+        "centro4": {
+            "nombre": "Hospital San Jorge",
+            "pais": "Colombia",
+            "responsable": "Sandra Olaya"
+        },
+        "centro5": {
+            "nombre": "Hospital SES de Caldas",
+            "pais": "Colombia",
+            "responsable": "Andrea España"
+        },
+        "centro6": {
+            "nombre": "Clínica Versalles",
+            "pais": "Colombia",
+            "responsable": "Paula Velásquez"
+        }
+    }
+}

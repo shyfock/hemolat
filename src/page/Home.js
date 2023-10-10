@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "../firebase";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+// import { auth } from "../firebase";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useAuthState } from "../firebase";
+
 
 const Home = () => {
-
+    const { user } = useAuthState()
+    const auth = getAuth()
     const navigate = useNavigate();
-
+    const [logged, setLogged] = useState(false);
     const handleLogout = () => {
         signOut(auth).then(() => {
+            setLogged(true);
             navigate("/");
             console.log("Signed out successfully")
         }).catch((error) => {
@@ -21,41 +25,45 @@ const Home = () => {
             if (user) {
                 // User is signed in, see docs for a list of available properties
                 // https://firebase.google.com/docs/reference/js/firebase.User
+                setLogged(true);
                 const uid = user.uid;
                 console.log("uid", uid)
-            } else {
+            } else if (!logged) {
                 console.log("user is logged out")
             }
         });
-    }, [])
+    }, [auth, logged])
 
     return (
         <>
-            <nav>
-                <h1>
-                    Módulo de Ingreso
-                </h1>
+            <div className="main">
                 <nav>
-                    <NavLink to="/patient">
+                    <NavLink className={"link"} to={"/"}>
+                        <div>
+                            <h1>Bienvenido {user?.email}</h1>
+                            <img eager lazy src="/public/docs/assets/images/Small-COINT.png" alt="Coint"/>
+                        </div>
+                    </NavLink>
+                    <NavLink className={"link"} to="/patient">
                         Ingresar paciente
                     </NavLink>
-                    <NavLink to="/historia">
-                        | Historia
+                    <NavLink className={"link"} to="/historia">
+                        Historia
                     </NavLink>
-                    <NavLink to="/seguimiento">
-                        | Parto
+                    <NavLink className={"link"} to="/seguimiento">
+                        Parto
                     </NavLink>
-                    <NavLink to="/seguimiento">
-                        | Hemorragia
+                    <NavLink className={"link"} to="/seguimiento">
+                        Hemorragia
                     </NavLink>
-                    <NavLink to="/seguimiento">
-                        | Transfusiones
+                    <NavLink className={"link"} to="/seguimiento">
+                        Transfusiones
                     </NavLink>
-                    <NavLink to="/seguimiento">
-                        | Seguimiento
+                    <NavLink className={"link"} to="/seguimiento">
+                        Seguimiento
                     </NavLink>
-                    <NavLink to="/seguimiento">
-                        | Egreso
+                    <NavLink className={"link"} to="/seguimiento">
+                        Egreso
                     </NavLink>
                 </nav>
                 <div>
@@ -63,7 +71,7 @@ const Home = () => {
                         Logout
                     </button>
                 </div>
-            </nav>
+            </div>
         </>
     )
 }
