@@ -1,23 +1,193 @@
-import { NavLink } from "react-router-dom";
+import { getDatabase, push, ref, set } from "firebase/database";
+import { useState } from "react";
+import InputLine from "../component/InputLine";
+import UniqueSelection from "../component/UniqueSelection";
+
+async function writeFollowUpData({state}) {
+    const db = getDatabase();
+    set(push(ref(db, "seguimiento/")), {
+        ...state
+    })
+}
 
 const Seguimiento = () => {
+    const [state, setState] = useState({});
+    console.log(state) 
     return (
-        <div>
-            <h1>Seguimiento</h1>
-            <NavLink to={"/"}>Atrás</NavLink>
-            <div>
-                <label htmlFor="PA-sistolica">PA-sistolica</label>
-                <input type='number' id='PA-sistolica' placeholder="50-250 mmHg"/>
-            </div>
-            
-{/* PA diastólica
-Frecuencia cardíaca
-Frecuencia respiratoria
-Conciencia 
-Soportes
-Destino
-Paciente */}
-
+        <div className="container">
+            <h1 className="display-6">Seguimiento</h1>
+            <form className="data-form">
+                <InputLine
+                    state={setState}
+                    name="fechaSeg"
+                    type="date" 
+                    text="Fecha" 
+                    placeholder=""
+                    units=""
+                />
+                <InputLine
+                    state={setState}
+                    name="paSistolica"
+                    type="number" 
+                    text="PA-sistólica" 
+                    placeholder="50-250 mmHg"
+                    units="mmHg"
+                />
+                <InputLine
+                    state={setState}
+                    name="paDiastolica"
+                    type="number" 
+                    text="PA-diastólica" 
+                    placeholder="50-250 mmHg"
+                    units="mmHg"
+                />
+                <div className="input-group mb-3">
+                    <span className="input-group-text"><label htmlFor="PA-media">PA-media</label></span>
+                    <input
+                        className="form-control"
+                        type='number' 
+                        id='PA-media' 
+                        placeholder="50-250 mmHg" 
+                        disabled
+                        value={(state.paDiastolica && state.paDiastolica > 0 && state.paSistolica && state.paSistolica > 0) ? Math.round(100*(2*state.paDiastolica + state.paSistolica)/3)/100 : ''}
+                    />
+                    <span className="input-group-text"> mmHg </span>
+                </div>
+                <InputLine
+                    state={setState}
+                    name="fCardiaca"
+                    type="number" 
+                    text="Frecuencia cardiaca" 
+                    placeholder="latidos/min."
+                    units="latidos/min."
+                />
+                <InputLine
+                    state={setState}
+                    name="fRespiratoria"
+                    type="number" 
+                    text="Frecuencia respiratoria" 
+                    placeholder="respiraciones/min."
+                    units="respiraciones/min."
+                />
+                <UniqueSelection 
+                    state={setState}
+                    item="conciencia"
+                    text="Conciencia"
+                    options={["Tranquila", "Agitada", "Letargia", "Inconciente"]}
+                />
+                <InputLine
+                    state={setState}
+                    name="diuresis"
+                    type="number" 
+                    text="Diuresis" 
+                    placeholder="función del peso y del tiempo"
+                    units="mL/k/h"
+                />
+                <InputLine
+                    state={setState}
+                    name="lCapilar"
+                    type="number" 
+                    text="Llenado capilar" 
+                    placeholder="tiempo en segundos"
+                    units="segundos"
+                />
+                <div className="input-group mb-3">
+                    <span className="input-group-text"><label htmlFor="i-choque">Índice de choque</label></span>
+                    <input 
+                        className="form-control"
+                        type='number'  
+                        id='-i-choque' 
+                        placeholder="FC / PAS" 
+                        disabled
+                        value={(state.paDiastolica && state.paDiastolica > 0 && state.fCardiaca && state.fCardiaca > 0) ? Math.round(100*(2*state.fCardiaca + state.paSistolica)/3)/100 : ''}
+                    />
+                </div>
+                <UniqueSelection 
+                    state={setState}
+                    item="gChHemo"
+                    text="Grado choque hemorrágico"
+                    options={["Compensada", "Leve", "Moderada", "Severa"]}
+                />
+                <div className="col">
+                    <h5 className="text-center">Soportes</h5>
+                    <InputLine
+                        state={setState}
+                        name=""
+                        type="radio" 
+                        text="Norepinefrina" 
+                        placeholder=""
+                        units=""
+                    />
+                    <InputLine
+                        state={setState}
+                        name=""
+                        type="radio" 
+                        text="Vasopresina" 
+                        placeholder=""
+                        units=""
+                    />
+                    <InputLine
+                        state={setState}
+                        name=""
+                        type="radio" 
+                        text="Adrenalina" 
+                        placeholder=""
+                        units=""
+                    />
+                    <InputLine
+                        state={setState}
+                        name=""
+                        type="radio" 
+                        text="Dopamina" 
+                        placeholder=""
+                        units=""
+                    />
+                    <InputLine
+                        state={setState}
+                        name=""
+                        type="radio" 
+                        text="Dobutamina" 
+                        placeholder=""
+                        units=""
+                    />
+                    <InputLine
+                        state={setState}
+                        name=""
+                        type="radio" 
+                        text="Sulfato de magnesio"
+                        placeholder=""
+                        units=""
+                    />
+                    <InputLine
+                        state={setState}
+                        name=""
+                        type="radio" 
+                        text="Labetatol" 
+                        placeholder=""
+                        units=""
+                    />
+                    <InputLine
+                        state={setState}
+                        name=""
+                        type="radio" 
+                        text="Otra" 
+                        placeholder=""
+                        units=""
+                    />
+                </div>
+                <UniqueSelection 
+                    state={setState}
+                    item="tUterino"
+                    text="Tono uterino"
+                    options={["Adecuado", "Hipotónico"]}
+                />
+                <UniqueSelection 
+                    state={setState}
+                    item="destino"
+                    text="Destino"
+                    options={["Hospitalización / Alojamiento conjunto", "Hospitalización / RN en UCI", "UCI obstétrica", "UCI obstétrica / RN en UCI", "Domicilio", "Morgue"]}
+                />
+            </form>
         </div>
     )
 }

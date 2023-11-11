@@ -24,24 +24,31 @@ const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 // const database = getDatabase(app);
 const auth = getAuth();
-export const AuthContext = createContext({user: auth.currentUser});
+export const AuthContext = createContext(auth);
 
 export const AuthContextProvider = ({children, ...props}) => {
   const [user, setUser] = useState();
-  const [error, setError] = useState();
+  //const [error, setError] = useState();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, setUser, setError)
+    const unsubscribe = () => onAuthStateChanged(auth, user => {
+      if (user){
+        setUser(user)
+        console.log(user)
+      } else {
+        setUser(null)
+      }
+    })
     return () => unsubscribe()
   }, [])
-  return <AuthContext.Provider value={{user, error}} {...props}>{children}</AuthContext.Provider>
+  return <AuthContext.Provider value={{user}} {...props}>{children}</AuthContext.Provider>
 }
 
 //export const auth = getAuth(app);
 export const useAuthState = () => {
   const authed = useContext(AuthContext)
-  console.log(authed.user)
-  return { ...authed, isAuthenticated: authed.user != null }
+  console.log(authed)
+  return { ...authed, isAuthenticated: authed.currentUser !== null }
 }
 
 export default app;

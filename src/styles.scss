@@ -1,0 +1,20 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+$eminence: #7b2c83;
+$prim: #f3e8f3;
+$trendy-pink: #a279a4;
+$east-side: #c291c6;
+$lilac: #c490bb;
+$finn: #5e2e5a;
+$bossanova: #5b2e64;
+$trendy-pink: #9e5ba5;
+$strikemaster: #a45c9c;
+
+$theme-colors: (
+    "primary": $eminence,
+    "secondary": $lilac,
+    "bs-tertiary-bg": $trendy-pink,
+    "bs-primary-rgb": purple
+);
+
+@import "bootstrap";

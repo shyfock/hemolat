@@ -16,7 +16,7 @@ const Login = () => {
         e.preventDefault();
         await setPersistence(auth, browserSessionPersistence)
         // await signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
+            .then(() => {
                 // const user = userCredential.user;
                 navigate("/home");
                 // console.log(user);
@@ -35,46 +35,42 @@ const Login = () => {
 
     return (
         <AuthContext.Provider value={authed}>
-            <main>
-                <section>
-                    <div>
-                        <h1> HemolatApp </h1>
-                        <form>
-                            <div>
-                                <label htmlFor="email-address">Correo Electrónico</label>
-                                <input
-                                    id="email-address"
-                                    name="email"
-                                    type="email"
-                                    required
-                                    placeholder="Correo Electrónico"
-                                    onChange={(e) => setEmail(e.target.value)}
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="password">Contraseña</label>
-                                <input
-                                    id="password"
-                                    name="password"
-                                    type="password"
-                                    required
-                                    placeholder="Contraseña"
-                                    onChange={(e) => setPassword(e.target.value)}
-                                />
-                            </div>
-                            <div>
-                                <button onClick={onLogin}>Ingresar</button>
-                            </div>
-                        </form>
-                        <p>
-                            ¿Aún no está registrado? {' '}
-                            <NavLink to="/signup">
-                                Registrarse
-                            </NavLink>
-                        </p>
+            <div className="container">
+                <form className="form-control">
+                <h1 className="display-6"> Iniciar sesión </h1>
+                    <div className="form-floating mb-3">
+                        <input
+                            className="form-control"
+                            id="email-address"
+                            name="email"
+                            type="email"
+                            required
+                            placeholder="Correo Electrónico"
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <label htmlFor="email-address">Correo Electrónico</label>
                     </div>
-                </section>
-            </main>
+                    <div className="form-floating mb-3">
+                        <input
+                            className="form-control"
+                            id="password"
+                            name="password"
+                            type="password"
+                            required
+                            placeholder="Contraseña"
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <label htmlFor="password">Contraseña</label>
+                    </div>
+                    <button className="btn btn-primary" onClick={onLogin}>Ingresar</button>
+                </form>
+                <span className="form-text">
+                    ¿Aún no está registrado? {' '}
+                    <NavLink className="link-dark" to="/signup">
+                        Registrarse
+                    </NavLink>
+                </span>
+            </div>
         </AuthContext.Provider>
     )
 }

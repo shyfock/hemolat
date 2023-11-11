@@ -1,19 +1,18 @@
 :root {
---eminence: #7b2c83;
---prim: #f3e8f3;
---trendy-pink: #a279a4;
---east-side: #c291c6;
---lilac: #c490bb;
---finn: #5e2e5a;
---bossanova: #5b2e64;
---trendy-pink: #9e5ba5;
---strikemaster: #a45c9c;
+  --eminence: #7b2c83;
+  --prim: #f3e8f3;
+  --trendy-pink: #a279a4;
+  --east-side: #c291c6;
+  --lilac: #c490bb;
+  --finn: #5e2e5a;
+  --bossanova: #5b2e64;
+  --trendy-pink: #9e5ba5;
+  --strikemaster: #a45c9c;
 }
 
 body {
-  margin: 0;
   font-family: Helvetica, sans-serif;
-  font-size: 16px;
+  /* font-size: 16px; */
   /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif; */
@@ -26,95 +25,7 @@ code {
     monospace;
 }
 
-/* input {
-  margin: 10px;
-  border-radius: 5px;
-  height: 30px;
-} */
-
-.main {
-  top: 30px;
-  display: flex;
-  flex-direction: column;
-}
-
-button:hover {
-  background-color: var(--eminence);
-}
-
 nav {
-  position: fixed;
-  top: 0;
-  height: 100px;
-  width: 100%;;
-  opacity: 80%;
-  background-color: var(--eminence);
-  color: var(--prim);
-  font-weight: 700;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-items: center;
-  justify-content: space-around;
-  & img {
-    /* background-color: #f3e8f3; */
-    object-fit: cover;
-    width: 300px;
-    height: 250px;
-  }
+  background: var(--eminence) !important;
 }
 
-.link {
-  color: var(--prim);
-  text-decoration: none;
-  &:hover {
-    color: var(--lilac);
-    font-size: 1.1rem;
-  };
-};
-.container {
-  width: 60%;
-  margin-left: 20%;
-  margin-right: 20%;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  align-items: center;
-  border: solid 2px var(--eminence);
-  border-radius: 1%;
-  
-}
-
-.input-line {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 0.8rem;
-}
-
-.input-line label {
-  font-weight: 800;
-}
-
-.input-line input, select {
-  margin: 10px;
-  border-radius: 5px;
-  border-color: var(--eminence);
-  width: 100%;
-  height: 20px;
-}
-
-.input-line input:hover, select:hover {
-  box-shadow: 1px 1px 0.5em var(--eminence);
-}
-
-.input-line span {
-  color: var(--prim);
-  background-color: var(--eminence);
-  height: 20px;
-  width: 100%;
-  border-radius: 0 5px 5px 0;
-  box-shadow: 2px 2px 0.1rem rgb(184, 180, 180);
-}

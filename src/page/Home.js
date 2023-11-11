@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import 'material-symbols';
 // import { auth } from "../firebase";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuthState } from "../firebase";
 
-
+const logoUrl = "https://firebasestorage.googleapis.com/v0/b/hemolat123.appspot.com/o/Logo-COINT.png?alt=media&token=8cea6cd1-f24b-41c6-8751-0e2efd499c90&_gl=1*h2hs2f*_ga*MTg0NTA3NTIxMC4xNjk1MTY3NjIw*_ga_CW55HF8NVT*MTY5NzA2NzUyMy4xMy4xLjE2OTcwNjc5MDcuNjAuMC4w";
 const Home = () => {
     const { user } = useAuthState()
     const auth = getAuth()
@@ -35,44 +36,76 @@ const Home = () => {
     }, [auth, logged])
 
     return (
-        <>
-            <div className="main">
-                <nav>
-                    <NavLink className={"link"} to={"/"}>
-                        <div>
-                            <h1>Bienvenido {user?.email}</h1>
-                            <img eager lazy src="/public/docs/assets/images/Small-COINT.png" alt="Coint"/>
+        <nav className="navbar sticky-top navbar-expand-lg" data-bs-theme="dark">
+            <div className="container-fluid">
+                <NavLink className="navbar-brand" to={"/"}>
+                    <img className="d-inline-block align-text-top" src={logoUrl} alt="Coint logo" width="30" height="24"/>
+                    {user?.email}
+                </NavLink>
+                <div className="input-group container-sm">
+                <label className="input-group-text">Cédula</label>
+                <input className="form-control" type="search" />
+                <span className="input-group-text material-symbols-outlined">search</span>
+                </div>
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarNavDropdown">
+                    <div className="navbar-nav">
+                        <div className="nav-item dropdown">
+                            <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Paciente
+                            </a>
+                            <div className="dropdown-menu">
+                                <NavLink className="dropdown-item" to='/patient/new'>
+                                    Ingresar nuevo
+                                </NavLink>
+                                <NavLink className="dropdown-item" to='/patient/search'>
+                                    Buscar
+                                </NavLink>
+                            </div>
                         </div>
-                    </NavLink>
-                    <NavLink className={"link"} to="/patient">
-                        Ingresar paciente
-                    </NavLink>
-                    <NavLink className={"link"} to="/historia">
-                        Historia
-                    </NavLink>
-                    <NavLink className={"link"} to="/seguimiento">
-                        Parto
-                    </NavLink>
-                    <NavLink className={"link"} to="/seguimiento">
-                        Hemorragia
-                    </NavLink>
-                    <NavLink className={"link"} to="/seguimiento">
-                        Transfusiones
-                    </NavLink>
-                    <NavLink className={"link"} to="/seguimiento">
-                        Seguimiento
-                    </NavLink>
-                    <NavLink className={"link"} to="/seguimiento">
-                        Egreso
-                    </NavLink>
-                </nav>
-                <div>
-                    <button onClick={handleLogout}>
-                        Logout
-                    </button>
+                        <NavLink className="nav-link" to="/historia">
+                            Historia
+                        </NavLink>
+                        <NavLink className="nav-link" to="/parto">
+                            Parto
+                        </NavLink>
+                        <NavLink className="nav-link" to="/bleed">
+                            Hemorragia
+                        </NavLink>
+                        <NavLink className="nav-link" to="/hemo">
+                            Transfusiones
+                        </NavLink>
+                        <NavLink className="nav-link" to="/seguimiento">
+                            Seguimiento
+                        </NavLink>
+                        <NavLink className="nav-link" to="/paraclinicos">
+                            Paraclínicos
+                        </NavLink>
+                        <NavLink className="nav-link" to="/egreso">
+                            Egreso
+                        </NavLink>
+                        <div className="nav-item dropdown">
+                            <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Usuario
+                            </a>
+                            <div className="dropdown-menu">
+                                <NavLink className="dropdown-item" to='/login'>
+                                    Ingresar
+                                </NavLink>
+                                <NavLink className="dropdown-item" to='/signup'>
+                                    Registrarse
+                                </NavLink>
+                                <NavLink className="dropdown-item" onClick={handleLogout}>
+                                    Cerrar sesión
+                                </NavLink>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </>
+        </nav>
     )
 }
 

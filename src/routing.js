@@ -1,5 +1,6 @@
 import { Navigate } from "react-router-dom"
 import { AuthContextProvider, useAuthState } from "./firebase"
+import Login from "./page/Login"
 // import { auth } from "./firebase"
 
 export const AuthenticatedRoute = ({ Children, ...props }) => {
@@ -8,8 +9,8 @@ export const AuthenticatedRoute = ({ Children, ...props }) => {
     return (
         <AuthContextProvider
             {...props}
-            render={routeprops =>
-                isAuthenticated ? {component: Children, ...routeprops} : <Navigate to={"/login"}/>
+            render={() =>
+                isAuthenticated ? {component: Children, ...props} : <Login />
             }
         />
     )
@@ -21,8 +22,8 @@ export const UnauthenticatedRoute = ({ Children, ...props }) => {
     return (
         <AuthContextProvider
             {...props}
-            render={routeprops =>
-                !isAuthenticated ? {component: Children, ...routeprops} : <Navigate to={"/"} />
+            render={() =>
+                !isAuthenticated ? {component: Children, ...props} : <Navigate to={"/"} />
             }
         />
     )

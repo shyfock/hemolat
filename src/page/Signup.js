@@ -24,53 +24,56 @@ const Signup = () => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log(errorCode, errorMessage);
+                if (errorCode === "auth/email-already-in-use") { 
+                    alert("La dirección de correo ingresada ya está registrada");
+                } else if (errorCode === "auth/invalid-email") {
+                    alert("La dirección de correo ingresada no es válida.")
+                }
             });
     }
 
     return (
-        <main>
-            <section>
-                <div>
-                    <div>
-                        <h1>HemolatApp</h1>
-                        <form>
-                            <div>
-                                <label htmlFor="email">Correo Electrónico</label>
-                                <input 
-                                    type='email' 
-                                    id="email" 
-                                    name='email'
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    required
-                                    placeholder="Correo Electrónico"
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="password">Contraseña</label>
-                                <input
-                                    type='password'
-                                    id="password"
-                                    name="password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    required
-                                    placeholder="Contraseña"
-                                    autoComplete="pass"
-                                />
-                            </div>
-                            <button type="submit" onClick={onSubmit}>Registrarse</button>
-                            <p>
-                                ¿Ya está registrado?{' '}
-                                <NavLink to="/login">
-                                    Ingresar
-                                </NavLink>
-                            </p>
-                        </form>
-                    </div>
+        <div className="container">
+            <form className="form-control">
+                <h1 className="display-6">HemolatApp</h1>
+                <div className="form-floating mb-3">
+                    <input 
+                        className="form-control"
+                        type='email' 
+                        id="email" 
+                        name='email'
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        placeholder="Correo Electrónico"
+                    />
+                    <label htmlFor="email">Correo Electrónico</label>
                 </div>
-            </section>
-        </main>
+                <div className="form-floating mb-3">
+                    <input
+                        className="form-control"
+                        type='password'
+                        id="password"
+                        name="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        placeholder="Contraseña"
+                        autoComplete="pass"
+                    />
+                    <label htmlFor="password">Contraseña</label>
+                </div>
+                <div className="input-line">
+                    <button className="btn btn-primary" type="submit" onClick={onSubmit}>Registrarse</button>
+                </div>
+            </form>
+            <span className="form-text">
+                ¿Ya está registrado?{' '}
+                <NavLink className="link-dark" to="/login">
+                    Ingresar
+                </NavLink>
+            </span>
+        </div>
     )
 }
 
