@@ -40,13 +40,13 @@ const Home = () => {
             <div className="container-fluid">
                 <NavLink className="navbar-brand" to={"/"}>
                     <img className="d-inline-block align-text-top" src={logoUrl} alt="Coint logo" width="30" height="24"/>
-                    {user?.email}
+                    <p>{user}</p>
                 </NavLink>
-                <div className="input-group container-sm">
+                {/* <div className="input-group container-sm">
                 <label className="input-group-text">Cédula</label>
                 <input className="form-control" type="search" />
                 <span className="input-group-text material-symbols-outlined">search</span>
-                </div>
+                </div> */}
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -65,27 +65,6 @@ const Home = () => {
                                 </NavLink>
                             </div>
                         </div>
-                        <NavLink className="nav-link" to="/historia">
-                            Historia
-                        </NavLink>
-                        <NavLink className="nav-link" to="/parto">
-                            Parto
-                        </NavLink>
-                        <NavLink className="nav-link" to="/bleed">
-                            Hemorragia
-                        </NavLink>
-                        <NavLink className="nav-link" to="/hemo">
-                            Transfusiones
-                        </NavLink>
-                        <NavLink className="nav-link" to="/seguimiento">
-                            Seguimiento
-                        </NavLink>
-                        <NavLink className="nav-link" to="/paraclinicos">
-                            Paraclínicos
-                        </NavLink>
-                        <NavLink className="nav-link" to="/egreso">
-                            Egreso
-                        </NavLink>
                         <div className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Usuario

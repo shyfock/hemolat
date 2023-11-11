@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import 'material-symbols';
 import "../styles.scss";
 import { SearchPatientById } from "../functions/search";
+import OffCanva from "../component/OffCanva";
 
 const db = getDatabase()
 
@@ -97,7 +98,8 @@ const SearchPatient = () => {
                             <SearchPatientById patientId={cedula}/>
                         </li>
                     </ul>
-                    <div className="btn-group">
+                    {patientFound ? <OffCanva /> : null}
+                    {/* <div className="btn-group">
                         {
                             [{
                                 path: "/historia", 
@@ -128,7 +130,7 @@ const SearchPatient = () => {
                                 route: "Egreso"
                             }].map((item, index) => {return <a className="btn btn-outline-primary" href={item.path} key={index} hidden={!patientFound}>{item.route}</a>})
                         }
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

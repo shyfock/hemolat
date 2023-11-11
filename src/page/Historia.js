@@ -17,7 +17,7 @@ const Historia = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         await writeHistoryData({state})
-            .then(() => {
+            .then((data) => {
                 console.log('Se ha creado registro de historia')
             })
             .catch(error => console.log(error.code))

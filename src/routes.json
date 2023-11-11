@@ -1,0 +1,32 @@
+{
+    "routes": [
+        {
+            "path": "/historia", 
+            "route": "Historia"
+        }, 
+        {
+            "path": "/parto", 
+            "route": "Parto"
+        }, 
+        {
+            "path": "/bleed",
+            "route": "Hemorragia"
+        }, 
+        {
+            "path": "/hemo",
+            "route": "Transfusiones"
+        },
+        {
+            "path": "/seguimiento",
+            "route": "Seguimiento"
+        },
+        {
+            "path": "/paraclinicos",
+            "route": "Paraclínicos"
+        },
+        {
+            "path": "/egreso",
+            "route": "Egreso"
+        }
+    ]
+}

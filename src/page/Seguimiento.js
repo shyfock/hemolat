@@ -1,8 +1,10 @@
 import { getDatabase, push, ref, set } from "firebase/database";
 import { useState } from "react";
 import InputLine from "../component/InputLine";
+import Modal from "../component/Modal";
 import UniqueSelection from "../component/UniqueSelection";
 
+const imgUrl = "https://firebasestorage.googleapis.com/v0/b/hemolat123.appspot.com/o/GCH.png?alt=media&token=b0703f61-0c57-42d7-a125-e78dc7a41a21";
 async function writeFollowUpData({state}) {
     const db = getDatabase();
     set(push(ref(db, "seguimiento/")), {
@@ -16,7 +18,7 @@ const Seguimiento = () => {
     return (
         <div className="container">
             <h1 className="display-6">Seguimiento</h1>
-            <form className="data-form">
+            <form className="row row-cols-lg-auto g-3 align-items-center">
                 <InputLine
                     state={setState}
                     name="fechaSeg"
@@ -102,6 +104,12 @@ const Seguimiento = () => {
                         value={(state.paDiastolica && state.paDiastolica > 0 && state.fCardiaca && state.fCardiaca > 0) ? Math.round(100*(2*state.fCardiaca + state.paSistolica)/3)/100 : ''}
                     />
                 </div>
+                <Modal 
+                    url={imgUrl} 
+                    alt="GCH"
+                    title="Grado de Choque Hemorrágico"
+                    source="Fuente: (Fescina , De Mucio , Ortiz , & Jarquin , 2012)"
+                />
                 <UniqueSelection 
                     state={setState}
                     item="gChHemo"

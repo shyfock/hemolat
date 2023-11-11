@@ -2,8 +2,9 @@ import { useState } from 'react';
 import InputLine from "../component/InputLine";
 import UniqueSelection from "../component/UniqueSelection";
 import MultipleSelection from '../component/MultipleSelection';
+import Modal from '../component/Modal';
 
-
+const imgUrl = "https://firebasestorage.googleapis.com/v0/b/hemolat123.appspot.com/o/HOE.png?alt=media&token=afc91e94-d735-4922-ad3f-b5de62d0cb5c"
 const Bleed = () => {
     const [state, setState] = useState({});
     console.log(state)
@@ -18,6 +19,12 @@ const Bleed = () => {
                     text="Fecha" 
                     placeholder=""
                     units=""
+                />
+                <Modal 
+                    url={imgUrl} 
+                    alt="HOM"
+                    title="Hemorragia Obstétrica Estimada"
+                    source="Fuente: (Bose , Regan , Paterson, & Brown , 2006)"
                 />
                 <UniqueSelection 
                     state={setState}
