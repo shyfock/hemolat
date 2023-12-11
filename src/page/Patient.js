@@ -1,11 +1,18 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { SearchTool } from "../functions/search";
 
-const Patient = () => {
+const Patient = (props) => {
     return (
-        <>
-            <Link to='/patient/new'>Ingresar nuevo</Link>
-            <Link to='/patient/search'>Buscar existente</Link>
-        </>
+        <div className="container">
+            <div className="container">
+                <button className="btn btn-outline-primary">
+                    <NavLink className="nav-link" to='/patient/new'>
+                        Ingresar nueva paciente
+                    </NavLink>
+                </button>
+                <SearchTool state={props.state}/>
+            </div>
+        </div>
     )
 }
 

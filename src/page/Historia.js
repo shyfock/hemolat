@@ -1,31 +1,41 @@
 import { getDatabase, push, ref, set } from "firebase/database";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import InputLine from "../component/InputLine";
 import UniqueSelection from "../component/UniqueSelection";
 import MultipleSelection from "../component/MultipleSelection";
+import { PatientUid } from "../functions/search";
+import { useNavigate } from "react-router-dom";
 
-async function writeHistoryData({state}) {
+
+async function writeHistoryData({state}, patientUid) {
     const db = getDatabase();
-    set(push(ref(db, 'history/')), {
+    await set(push(ref(db, 'patients/' + patientUid + '/history')), {
         ...state
     })
 }
 
 const Historia = () => {
     const [state, setState] = useState({})
+    const [loading, setLoading] = useState(false);
+    const pId = useContext(PatientUid);
+    const navigate = useNavigate()
     console.log(state)
     const onSubmit = async (e) => {
         e.preventDefault();
-        await writeHistoryData({state})
+        setLoading(true)
+        await writeHistoryData({state}, pId)
             .then((data) => {
+                setLoading(false)
                 console.log('Se ha creado registro de historia')
+                navigate("/patient/search")
             })
             .catch(error => console.log(error.code))
-            Array.from(
-                document.querySelectorAll('input')
-            ).forEach(input => {
-                input.value = "";
-            })
+        
+        Array.from(
+            document.querySelectorAll('input')
+        ).forEach(input => {
+            input.value = "";
+        })
         console.log(state)
     }
 
@@ -168,8 +178,12 @@ const Historia = () => {
                     placeholder="cantidad de abortos"
                     units="und"
                 />
+                
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button className="btn btn-outline-primary" type="submit" onClick={onSubmit}>Enviar</button>
+                    <button className="btn btn-outline-primary" type="submit" onClick={onSubmit}>
+                        {loading ? <span className="spinner-border spinner-border-sm" aria-hidden="true"></span>:null}
+                        <span role="status">Enviar</span>
+                    </button>
                 </div>
             </form>
         </div>

@@ -12,7 +12,11 @@ const InputLine = (props) => {
         if (e.target.type !== "radio") {
             const name = {}
             if (e.target.type === "number") {
-                name[e.target.id] = parseFloat(e.target.value)
+                if (props.text !== "ID") {
+                    name[e.target.id] = parseFloat(e.target.value)
+                } else {
+                    name[e.target.id] = e.target.value
+                }
             } else {
                 if (e.target.id !== "Otra") {
                     name[e.target.id] = e.target.value

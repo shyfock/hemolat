@@ -1,19 +1,35 @@
-import { NavLink } from "react-router-dom";
-import routes from "../routes.json";
+import { NavLink, useNavigate } from "react-router-dom";
+import { ComponentsMap } from "../page/ComponentsMap";
+import 'material-symbols';
+//import routes from "../routes.json";
+const routes = ComponentsMap;
 
-const OffCanva = () => {
-    
-    console.log(routes)
+const OffCanva = (props) => {
+    const setState = props.state
+    const navigate = useNavigate()
+    const handleClose = (e) => {
+        e.preventDefault()
+        setState()
+        navigate("/patient")
+    }
+
     return(
-        <nav className="navbar navbar-dark bg-body-primary sticky-top">
+        <nav className="navbar navbar-dark navbar-expand-lg bg-body-primary fixed-top">
             <div className="container-fluid">
-                <p className="navbar-brand">Ingresar información</p>
-                <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+                <div className="navbar-brand">
+                <span className="material-symbols-outlined aligned-middle">
+                    medical_information
+                </span><p>Ingresar registros</p>
+                <button className="btn btn-outline-secondary" onClick={handleClose}>
+                Buscar
+                </button>
+                </div>
+                <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navMenu" aria-controls="navMenu" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="offcanvas offcanvas-end text-bg-dark" tabIndex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                <div className="offcanvas offcanvas-end text-bg-dark" tabIndex="-1" id="navMenu" aria-labelledby="navMenuLabel" data-bs-dismiss="offcanvas">
                     <div className="offcanvas-header">
-                        <h5 className="offcanvas-title" id="offcanvasDarkNavbarLabel">Menú de opciones</h5>
+                        <h5 className="offcanvas-title" id="navMenuLabel">Menú de opciones</h5>
                         <button type="button" className="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <div className="offcanvas-body">
@@ -27,6 +43,12 @@ const OffCanva = () => {
                                     </li>
                                 )
                             })}
+                            <li className="nav-item">
+                                <hr className="divider"/>
+                            </li>
+                            <li className="nav-item">
+                                <button className="nav-link" onClick={handleClose}>Salir</button>
+                            </li>
                         </ul>
                     </div>
                 </div>

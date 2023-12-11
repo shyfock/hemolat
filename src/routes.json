@@ -2,31 +2,45 @@
     "routes": [
         {
             "path": "/historia", 
-            "route": "Historia"
+            "route": "Historia",
+            "component": "Historia",
+            "dbPath": "/history"
         }, 
         {
             "path": "/parto", 
-            "route": "Parto"
+            "route": "Parto",
+            "component": "Parto",
+            "dbPath": "/parto"
         }, 
         {
             "path": "/bleed",
-            "route": "Hemorragia"
+            "route": "Hemorragia",
+            "component": "Bleed",
+            "dbPath": "/bleed"
         }, 
         {
             "path": "/hemo",
-            "route": "Transfusiones"
+            "route": "Transfusiones",
+            "component": "Hemo",
+            "dbPath": "/hemo"
         },
         {
             "path": "/seguimiento",
-            "route": "Seguimiento"
+            "route": "Seguimiento",
+            "component": "Seguimiento",
+            "dbPath": "/seguimiento"
         },
         {
             "path": "/paraclinicos",
-            "route": "Paraclínicos"
+            "route": "Paraclínicos",
+            "component": "Labs",
+            "dbPath": "/labs"
         },
         {
             "path": "/egreso",
-            "route": "Egreso"
+            "route": "Egreso",
+            "component": "Egreso",
+            "dbPath": "/egreso"
         }
     ]
 }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { getDatabase, push, ref, set } from "firebase/database";
 import 'material-symbols';
 import InputLine from "../component/InputLine";
+import { useNavigate } from "react-router-dom";
 
 async function writePatientData({state}) {
     const db = getDatabase();
@@ -13,20 +14,30 @@ async function writePatientData({state}) {
     );
     return patientRef.key
 }
-const NewPatient = () => {
+const NewPatient = (props) => {
     //state variables for the form inputs and button
     // const [patientId, setPatientId] = useState("");
     const [state, setState] = useState({});
+    const [loading, setLoading] = useState(false)
+    const setPid = props.state;
+    const navigate = useNavigate()
 
     //onsubmit function to send data to firebase database
     const onSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true)
         await writePatientData({state})
-            .then(() => {
-                console.log("PATIENT CREATED")
+            .then((data) => {
+                setPid(data)
+                setLoading(false)
+                console.log("PATIENT CREATED: ", data)
             })
-            .catch(error => console.log(error.code))
+            .catch(error => {
+                setLoading(false)
+                console.log(error.code)
+            })
         onReset()
+        navigate('/patient/search')
     }
 
     const onReset = () => {
@@ -88,7 +99,15 @@ const NewPatient = () => {
                     units=""
                 />
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button className="btn btn-outline-primary" type="submit" onClick={onSubmit}>Agregar Paciente</button>
+                    <button className="btn btn-outline-primary" type="submit" onClick={onSubmit}>
+                        {
+                            loading ? 
+                                <span className="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                            :
+                                null
+                        }
+                        <span role="status">Enviar</span>
+                    </button>
                     <button className="btn btn-outline-secondary" type="reset" onClick={onReset}>Limpiar</button>
                 </div>
             </form>

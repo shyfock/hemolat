@@ -14,7 +14,11 @@ $theme-colors: (
     "primary": $eminence,
     "secondary": $lilac,
     "bs-tertiary-bg": $trendy-pink,
-    "bs-primary-rgb": purple
+    "bs-primary-rgb": purple,
+    "danger": #e40017f1,
+    "warning": #ba4523, 
+    "success": #198754,
+    "bg-primary": $bossanova,
 );
 
 @import "bootstrap";

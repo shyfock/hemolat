@@ -1,136 +1,136 @@
 {
-    "Colombia": {
-        "COL-1": {
+    "Colombia": [
+        {
             "nombre": "Hospital de Suba",
             "responsable": "Liliana Correa"
         },
-        "COL-2": {
+        {
             "nombre": "Hospital de Kennedy",
             "responsable": "Héctor González"
         },
-        "COL-3": {
+        {
             "nombre": "Subred Norte",
             "responsable": "Ayesa Ortegón"
         },
-        "COL-4": {
+        {
             "nombre": "Hospital San Jorge",
             "responsable": "Sandra Olaya"
         },
-        "COL-5": {
+        {
             "nombre": "Hospital SES de Caldas",
             "responsable": "Andrea España"
         },
-        "COL-6": {
+        {
             "nombre": "Clínica Versalles",
             "responsable": "Paula Velásquez"
         }
-    },
-    "Bolivia": {
-        "BOL-1": {
+    ],
+    "Bolivia": [
+        {
             "nombre": "Hospital Materno Infantil",
             "responsable": "Adolfo Isael Vasquez"
         },
-        "BOL-2": {
+        {
             "nombre": "HMI",
             "responsable": "Sandro Chavarría"
         },
-        "BOL-3": {
+        {
             "nombre": "Hospital de la Mujer",
             "responsable": "Sergio Monasterios"
         },
-        "BOL-4": {
+        {
             "nombre": "Hospital Boliviano Holandés",
             "responsable": "Michel Eduardo"
         },
-        "BOL-5": {
+        {
             "nombre": "CNS",
             "responsable": "Juan Cerezo"
         },
-        "BOL-6": {
+        {
             "nombre": "Hospital la Merced",
             "responsable": "Maria del Carmen Gallego"
         },
-        "BOL-7": {
+        {
             "nombre": "Hospital del Norte",
             "responsable": "Antonio Viruez"
         }
-    },
-    "PARAGUAY": {
-        "PAR-1": {
+    ],
+    "Paraguay": [
+        {
             "nombre": "Hospital Infantil San Pablo",
             "responsable": "Vicente Vega"
         },
-        "PAR-2": {
+        {
             "nombre": "Instituto de Previsión Social",
             "responsable": "Miriam Duarte"
         },
-        "PAR-3": {
+        {
             "nombre": "Hospital General Obrero",
             "responsable": "Gustavo Fernandez"
         }
-    },
-    "GUATEMALA": {
-        "GUA-1": {
+    ],
+    "Guatemala": [
+        {
             "nombre": "Hospital General San Juan de Dios",
             "responsable": "Juan Carlos Barrientos"
         }
-    },
-    "ECUADOR": {
-        "ECU-1": {
+    ],
+    "Ecuador": [
+        {
             "nombre": "HAGP",
             "responsable": "Juan Minchala"
         },
-        "ECU-2": {
+        {
             "nombre": "Nueva Aurora",
             "responsable": "Marco Antonio Heras"
         },
-        "ECU-3": {
+        {
             "nombre": "Hospital general de Ecuador",
             "responsable": "Carlos Andrade"
         },
-        "ECU-4": {
+        {
             "nombre": "Hospital general de Ecuador",
             "responsable": "Abel Gilpert"
         },
-        "ECU-5": {
+        {
             "nombre": "Hospital Vicente Corral",
             "responsable": "Paul Cobos"
         }
-    },
-    "PERU": {
-        "PER-1": {
+    ],
+    "Perú": [
+        {
             "nombre": "Hospital Rebagliati",
             "responsable": "Chauca"
         },
-        "PER-2": {
+        {
             "nombre": "HS Sabogal",
             "responsable": "Giancarlo Perez"
         },
-        "PER-3": {
+        {
             "nombre": "Clínica Ricardo Palma",
             "responsable": "Vanessa Ruiz"
         },
-        "PER-4": {
+        {
             "nombre": "Guillermo Almenara",
             "responsable": "Raúl Alegría"
         },
-        "PER-5": {
+        {
             "nombre": "Hospital Iquitos",
             "responsable": "Yessenia Ramos"
         },
-        "PER-6": {
+        {
             "nombre": "Instituto Nacional Materno Perinatal",
             "responsable": "Alberto Díaz"
         }
-    },
-    "MEXICO": {
-        "MEX-1": {
+    ],
+    "México": [
+        {
             "nombre":"IMSS",
             "responsable": "Francisco Alonso Díaz"
         },
-        "MEX-2": {
+        {
             "nombre":"INPER",
             "responsable": "Miguel Nares"
         }
-    } 
+    ]
 }

@@ -1,30 +1,47 @@
 import { Navigate } from "react-router-dom"
-import { AuthContextProvider, useAuthState } from "./firebase"
-import Login from "./page/Login"
-// import { auth } from "./firebase"
+import { AuthContextProvider } from "./firebase"
+import { auth } from "./firebase"
 
-export const AuthenticatedRoute = ({ Children, ...props }) => {
-    const { isAuthenticated } = useAuthState()
-    console.log(isAuthenticated)
+export const AuthenticatedRoute = ({ children, ...props }) => {
+    const {currentUser} = auth
+    const isAuthenticated = currentUser !== null 
+    // console.log(currentUser)
+    // console.log(isAuthenticated)
     return (
-        <AuthContextProvider
-            {...props}
-            render={() =>
-                isAuthenticated ? {component: Children, ...props} : <Login />
-            }
-        />
+            <>
+                {
+                    isAuthenticated ? 
+                        <AuthContextProvider {...props}>
+                            {children}
+                        </AuthContextProvider> 
+                    : 
+                        <Navigate to={"/login"} />}
+            </>
+        // <AuthContextProvider
+        //     {...props}
+        //     render={(routeProps) =>
+        //         isAuthenticated ? {component: Children, ...routeProps} : <Login />
+        //     }
+        // />
     )
 }
 
-export const UnauthenticatedRoute = ({ Children, ...props }) => {
-    const { isAuthenticated } = useAuthState()
-    console.log(isAuthenticated)
-    return (
-        <AuthContextProvider
-            {...props}
-            render={() =>
-                !isAuthenticated ? {component: Children, ...props} : <Navigate to={"/"} />
-            }
-        />
-    )
-}
+// export const UnauthenticatedRoute = ({ children, ...props }) => {
+//     const { isAuthenticated } = useAuthState()
+//     console.log(isAuthenticated)
+//     return (
+//         <>
+//             {!isAuthenticated ?
+//                     <AuthContextProvider {...props}>
+//                         {children}
+//                     </AuthContextProvider> 
+//                 : 
+//                     <Navigate to={"/"} />}</>
+//         // <AuthContextProvider
+//         //     {...props}
+//         //     render={(routeProps) =>
+//         //         !isAuthenticated ? {component: Children, ...routeProps} : <Navigate to={"/"} />
+//         //     }
+//         // />
+//     )
+// }
