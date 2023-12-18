@@ -1,9 +1,11 @@
-import { getDatabase, onValue, ref } from "firebase/database"
+import { child, getDatabase, onValue, ref } from "firebase/database"
 import { createContext, useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { auth } from "../firebase"
 
 const db = getDatabase()
 export const PatientUid = createContext()
+export const UserCenter = createContext()
 
 export const SearchPatientById = ({...props}) => {
     const [id, setId] = useState()
@@ -57,6 +59,27 @@ export const PatientUidProvider = ({children, ...props}) => {
         }
     )
     return <PatientUid.Provider value={pId} {...props}>{children}</PatientUid.Provider>
+}
+
+export const UserCenterProvider = ({ children, ...props}) => {
+    const [healthCenter, setHealthCenter] = useState()
+    const user = auth.currentUser;
+    onValue(
+        (child(ref(db, "users/"), `${user.uid}`)),
+        (snapshot) => {
+            if (snapshot.exists && snapshot.val() !== null) {
+                console.log(Object.values(snapshot.val())[0]["centro-hospitalario"])
+                setHealthCenter(Object.values(snapshot.val())[0]["centro-hospitalario"])
+                return true
+            } else {
+                setHealthCenter(null)
+            }
+        },
+        {
+            onlyOnce: true,
+        }
+    )
+    return <UserCenter.Provider value={healthCenter} {...props}>{children}</UserCenter.Provider>
 }
 
 export const SearchTool = (props) => {

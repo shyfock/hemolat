@@ -18,7 +18,7 @@ const Historia = () => {
     const [state, setState] = useState({})
     const [loading, setLoading] = useState(false);
     const pId = useContext(PatientUid);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     console.log(state)
     const onSubmit = async (e) => {
         e.preventDefault();

@@ -4,7 +4,7 @@ const db = getDatabase();
 
 const InfoModal = (props) => {
     const {title, dbPath, pId} = {...props}
-    const [state, setState] = useState({});
+    const [state, setState] = useState();
 
     useEffect(() => onValue(ref(db,"patients/" + pId + dbPath), snapshot => {
             snapshot.forEach((data) => {
@@ -20,11 +20,18 @@ const InfoModal = (props) => {
     return (
         <>
             {/* <!-- Button trigger modal --> */}
+            {!state || state === null? 
+                <button type="button" className="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target={`#${title}`} disabled>
+                <span className="material-symbols-outlined align-middle">
+                    visibility_off
+                </span>
+                </button> 
+            : 
             <button type="button" className="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target={`#${title}`}>
                 <span className="material-symbols-outlined align-middle">
                     visibility
                 </span>
-            </button>
+            </button>}
 
             {/* <!-- Modal --> */}
             <div className="modal fade" id={title} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby={title + "-drop"} aria-hidden="true">
@@ -36,7 +43,7 @@ const InfoModal = (props) => {
                 </div>
                 <div className="modal-body">
                     {/* {dbPath} */}
-                    <ol>
+                    {!state || state === null ? <p>No hay registros</p> : <ol>
                     {Object.entries(state).map((data, i) => {
                         return (
                         <li key={i}>
@@ -60,11 +67,11 @@ const InfoModal = (props) => {
                         </li>
                         )
                     })}
-                    </ol>
+                    </ol>}
                 </div>
                 <div className="modal-footer">
-                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" className="btn btn-primary">Understood</button>
+                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" className="btn btn-primary" disabled>Aceptar</button>
                 </div>
                 </div>
             </div>

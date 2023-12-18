@@ -20,7 +20,7 @@ const Home = (props) => {
         signOut(auth).then(() => {
             // sessionStorage.removeItem('idToken')
             setLogged(false);
-            navigate("/login");
+            navigate("/");
             console.log("Signed out successfully")
         }).catch((error) => {
             console.log('Error signing out: ', error);
@@ -34,7 +34,7 @@ const Home = (props) => {
             if (user) {
                 onValue(ref(db, "users/" + user.uid), snapshot => {
                     snapshot.val()? setIsProfile('/profile') : setIsProfile('/profile/update');
-                    console.log(isProfile)
+                    // console.log(isProfile)
                     return true
                 }, 
                 { 

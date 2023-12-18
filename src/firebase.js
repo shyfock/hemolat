@@ -3,7 +3,9 @@ import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
 // import { getDatabase } from "firebase/database";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+// import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "firebase/app-check"
 import { createContext, useContext, useEffect, useState } from "react";
+// import { RecaptchaEnterpriseServiceClient } from "@google-cloud/recaptcha-enterprise";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -21,6 +23,11 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+// window.self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
+// export const appCheck = initializeAppCheck(app, {
+//   provider: new ReCaptchaEnterpriseProvider("6Ldz0S0pAAAAABqnXzpT4Hzp4nzMsBBRbLhTAOcM"),
+//   isTokenAutoRefreshEnabled: true
+// })
 
 // const analytics = getAnalytics(app);
 // const database = getDatabase(app);

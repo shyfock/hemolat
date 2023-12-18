@@ -8,11 +8,9 @@ import Patient from "./page/Patient";
 import { AuthenticatedRoute } from "./routing";
 import SearchPatient from './page/SearchPatient';
 import NewPatient from './page/NewPatient';
-import { PatientUidProvider } from './functions/search';
+import { PatientUidProvider, UserCenterProvider } from './functions/search';
 import { ComponentsMap } from "./page/ComponentsMap";
 import OffCanva from "./component/OffCanva";
-import { AuthContextProvider, useAuthState } from "./firebase";
-import { getAuth } from "firebase/auth";
 import { auth } from "./firebase";
 import { UserProfile, UpdateProfile } from "./page/UserProfile";
 import "material-symbols";
@@ -114,9 +112,11 @@ function App() {
                     path='/patient/new'
                     element={
                         <AuthenticatedRoute>
+                        <UserCenterProvider>
                         <PatientUidProvider patientId={patientId}>
                             <NewPatient state={setPatientId} />
                         </PatientUidProvider>
+                        </UserCenterProvider>
                         </AuthenticatedRoute>
                     }
                 />

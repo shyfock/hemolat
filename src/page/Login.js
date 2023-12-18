@@ -3,6 +3,8 @@ import { setPersistence, signInWithEmailAndPassword, browserSessionPersistence }
 import { auth } from "../firebase";
 import { NavLink, useNavigate } from "react-router-dom";
 
+
+
 const Login = () => {
     //const auth = getAuth()
     const [email, setEmail] = useState('');
@@ -10,7 +12,19 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     
-    
+    // const onLoadCallBack = () => {
+    //     window.alert("grecaptcha is ready!");
+    //     // window.grecaptcha.enterprise.render('html_element', {
+    //     //     sitekey: "6Ldz0S0pAAAAABqnXzpT4Hzp4nzMsBBRbLhTAOcM"
+    //     // })
+        
+    // }
+
+    // useEffect(() => {
+    //     onLoadCallBack()
+    //     //console.log(appCheck)
+    // }, [])
+
     const onLogin = async (e) => {
         e.preventDefault();
         setLoading(true)
@@ -44,6 +58,7 @@ const Login = () => {
     return (
         <div className="container">
             <form className="form-control">
+            {/* <div id="html_element"></div> */}
             <h1 className="display-6"> Iniciar sesión </h1>
                 <div className="form-floating mb-3">
                     <input
@@ -53,6 +68,7 @@ const Login = () => {
                         type="email"
                         required
                         placeholder="Correo Electrónico"
+                        autoComplete="username"
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <label htmlFor="email-address">Correo Electrónico</label>
@@ -65,6 +81,7 @@ const Login = () => {
                         type="password"
                         required
                         placeholder="Contraseña"
+                        autoComplete="current-password"
                         onChange={(e) => setPassword(e.target.value)}
                     />
                     <label htmlFor="password">Contraseña</label>

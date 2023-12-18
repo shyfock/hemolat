@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { getDatabase, push, ref, set } from "firebase/database";
 import 'material-symbols';
 import InputLine from "../component/InputLine";
 import { useNavigate } from "react-router-dom";
+import { UserCenter } from "../functions/search";
 
 async function writePatientData({state}) {
     const db = getDatabase();
@@ -19,13 +20,20 @@ const NewPatient = (props) => {
     // const [patientId, setPatientId] = useState("");
     const [state, setState] = useState({});
     const [loading, setLoading] = useState(false)
+    const healthCenter = useContext(UserCenter);
     const setPid = props.state;
     const navigate = useNavigate()
-
+    useEffect(() => setState(prevState => ({
+        ...prevState,
+        "centro-hospitalario": healthCenter
+    })), [healthCenter])
     //onsubmit function to send data to firebase database
     const onSubmit = async (e) => {
         e.preventDefault();
+        console.log(healthCenter)
         setLoading(true)
+        
+        if (healthCenter && healthCenter !== null) {
         await writePatientData({state})
             .then((data) => {
                 setPid(data)
@@ -38,6 +46,11 @@ const NewPatient = (props) => {
             })
         onReset()
         navigate('/patient/search')
+        } else {
+            setLoading(false)
+            window.alert("Usted no ha ingresado su centro de operación. Actualice su perfil");
+            navigate("/profile/update")
+        }
     }
 
     const onReset = () => {

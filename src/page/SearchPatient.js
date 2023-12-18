@@ -55,6 +55,12 @@ const SearchPatient = () => {
             setLoading(false);
         }
     }
+
+    const deleteReg = (event, dbPath) => {
+        event.preventDefault()
+        if (window.confirm("¿Desea borrar este registro?")) 
+        remove(ref(db, `patients/${pId}${dbPath}`))
+    }
     return (
         <div className="container">
             {/* <InfoModal 
@@ -72,17 +78,17 @@ const SearchPatient = () => {
                 <p className="card-text"><b>Identificación</b></p>
                 </div>
                 <ul className="list-group list-group-flush">
-                    <li className="list-group-item">Nombre: {patient.name}</li>
-                    <li className="list-group-item">Apellidos: {patient.lastname}</li>
-                    <li className="list-group-item">Documento: {patient.patientId}</li>
+                    <li className="list-group-item">Nombre: {patient.name || "No hay registro"}</li>
+                    <li className="list-group-item">Apellidos: {patient.lastname  || "No hay registro"}</li>
+                    <li className="list-group-item">Documento: {patient.patientId || "No hay registro"}</li>
                 </ul>
                 <div className="card-header">
                 <p className="card-text"><b>Contacto</b></p>
                 </div>
                 <ul className="list-group list-group-flush">
                     
-                    <li className="list-group-item">Email: {patient.email}</li>
-                    <li className="list-group-item">Teléfono: {patient.phoneNumber}</li>
+                    <li className="list-group-item">Email: {patient.email || "No hay registro"}</li>
+                    <li className="list-group-item">Teléfono: {patient.phoneNumber || "No hay registro"}</li>
                 </ul>
                 <div className="card-header">
                 <p className="card-text"><b>Registros de la paciente</b></p>
@@ -94,7 +100,7 @@ const SearchPatient = () => {
                             <th scope="col">Tipo</th>
                             <th scope="col">Ver</th>
                             <th scope="col">Agregar</th>
-                            <th scope="col">Actualizar</th>
+                            <th scope="col">Borrar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -130,9 +136,11 @@ const SearchPatient = () => {
                                         </NavLink>
                                     </td>
                                     <td>
-                                        <button className="btn btn-outline-secondary">
+                                        <button className="btn btn-outline-secondary"
+                                            onClick={(e) => deleteReg(e, route.dbPath)}
+                                        >
                                             <span className="material-symbols-outlined align-middle">
-                                                check
+                                                delete
                                             </span>
                                         </button>
                                     </td>
