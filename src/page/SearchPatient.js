@@ -6,6 +6,7 @@ import { PatientUid } from "../functions/search";
 import { NavLink, useNavigate } from "react-router-dom";
 import routes from "../routes.json";
 import InfoModal from "../component/InfoModal";
+import UpdateModal from "../component/UpdateModal";
 
 const db = getDatabase()
 
@@ -100,6 +101,7 @@ const SearchPatient = () => {
                             <th scope="col">Tipo</th>
                             <th scope="col">Ver</th>
                             <th scope="col">Agregar</th>
+                            {/* <th scope="col">Modificar</th> */}
                             <th scope="col">Borrar</th>
                         </tr>
                     </thead>
@@ -135,6 +137,14 @@ const SearchPatient = () => {
                                             </span>
                                         </NavLink>
                                     </td>
+                                    {/* <td>
+                                        <UpdateModal 
+                                            title={route.route}
+                                            dbPath={route.dbPath}
+                                            route={route.path}
+                                            pId={pId}
+                                        />
+                                    </td> */}
                                     <td>
                                         <button className="btn btn-outline-secondary"
                                             onClick={(e) => deleteReg(e, route.dbPath)}

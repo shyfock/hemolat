@@ -7,7 +7,7 @@ const InputLine = (props) => {
     const text = props.text.replace(/ /g, "-");
     const otherName = {}
     const handleChange = (e) => {
-
+        
         const grandPa = e.target.parentNode.parentNode.parentNode.firstChild.innerHTML;
         if (e.target.type !== "radio") {
             const name = {}
@@ -15,7 +15,13 @@ const InputLine = (props) => {
                 if (props.text !== "ID") {
                     name[e.target.id] = parseFloat(e.target.value)
                 } else {
-                    name[e.target.id] = e.target.value
+                    let timeout;
+                    clearTimeout(timeout)
+                    timeout = setTimeout(() => {
+                        if (e.target.value.trim() !== '') {
+                            name[e.target.id] = e.target.value
+                        }
+                    }, 500);
                 }
             } else {
                 if (e.target.id !== "Otra") {

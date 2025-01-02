@@ -32,7 +32,15 @@ const Seguimiento = () => {
             ).forEach(input => {
                 input.value = "";
             })
+            // Unload form information after submit
+            Array.from(
+                document.querySelectorAll('form')
+            ).forEach(form => {
+                form.reset();
+            });
         console.log(state)
+        // Reset state after submit
+        setState({})
     }
     return (
         <div className="container">
@@ -120,7 +128,7 @@ const Seguimiento = () => {
                         id='-i-choque' 
                         placeholder="FC / PAS" 
                         disabled
-                        value={(state.paDiastolica && state.paDiastolica > 0 && state.fCardiaca && state.fCardiaca > 0) ? Math.round(100*(2*state.fCardiaca + state.paSistolica)/3)/100 : ''}
+                        value={(state.paDiastolica && state.paDiastolica > 0 && state.fCardiaca && state.fCardiaca > 0) ? Math.round(100*(state.fCardiaca / state.paSistolica))/100 : ''}
                     />
                 </div>
                 <Modal 

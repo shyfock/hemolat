@@ -1,5 +1,5 @@
 import { getDatabase, push, ref, set } from 'firebase/database';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import InputLine from "../component/InputLine";
 import UniqueSelection from "../component/UniqueSelection";
 import { PatientUid } from '../functions/search';
@@ -15,7 +15,38 @@ const Hemo = () => {
     const [state, setState] = useState({});
     const [loading, setLoading] = useState(false)
     const pId = useContext(PatientUid);
+    // const ifNot = () => {         
+    //     setState({
+    //         ...state, 
+    //         "Hemoderivado": { 
+    //             ...state["Hemoderivado"], 
+    //             "unidadCompProtromb": "" 
+    //         } 
+    //     })     
+    // }
 
+    useEffect(() => {
+        // const ifNot = () => {
+            if(state && state["Hemoderivado"] && state["Hemoderivado"]["Fibrinógeno"]==="NO") {
+                setState(prevState => ({
+                    ...prevState, 
+                    "Hemoderivado": { 
+                        ...prevState["Hemoderivado"], 
+                        "unidadCompProtromb": "" 
+                    } 
+                }))
+            }
+            if(state && state["Hemoderivado"] && state["Hemoderivado"]["Complejo-protrombínico"]==="NO") {
+                setState(prevState => ({
+                    ...prevState,
+                    "Hemoderivado": {
+                        ...prevState["Hemoderivado"],
+                        "unidadFibrinogeno": ""
+                    }
+                }))
+            }
+        // }
+    }, [state])
     const onSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -33,6 +64,7 @@ const Hemo = () => {
         console.log(state)
     }
     console.log(state)
+    // console.log(state && state["Hemoderivado"] && state["Hemoderivado"]["Fibrinógeno"])
     return(
         <div className="container">
             <h1 className="display-6">Hemocomponentes / Hemoderivados</h1>
@@ -61,6 +93,17 @@ const Hemo = () => {
                         placeholder=""
                         units=""
                     />
+                    
+                    {state && state["Hemoderivado"] && state["Hemoderivado"]["Fibrinógeno"]==="SI"?
+                        <InputLine
+                            state={setState}
+                            name="unidadFibrinogeno"
+                            type="number"
+                            text="Unidades"
+                            placeholder="miligramos"
+                            units="mmg"
+                        />: null
+                    }
                     <InputLine
                         state={setState}
                         name=""
@@ -69,6 +112,18 @@ const Hemo = () => {
                         placeholder=""
                         units=""
                     />
+                    
+                    {state && state["Hemoderivado"] && state["Hemoderivado"]["Complejo-protrombínico"]==="SI"?
+                        <InputLine
+                            state={setState}
+                            name="unidadCompProtromb"
+                            type="number"
+                            text="Unidades"
+                            placeholder="ampolla"
+                            units="ampolla"
+                        /> : null
+                    }
+                    
                 </div>
                 <InputLine
                     state={setState}
